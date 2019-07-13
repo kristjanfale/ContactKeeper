@@ -1,6 +1,10 @@
 const express = require('express'); // Import express
+const connectDB = require('./config/db');
 
 const app = express(); // Initialize express
+
+// Connect Database
+connectDB();
 
 // Add an end point (url and data)
 app.get('/', (req, res) =>
