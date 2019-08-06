@@ -6,13 +6,16 @@ const app = express(); // Initialize express
 // Connect Database
 connectDB();
 
+// Init Middleware
+app.use(express.json({ extended: false })); // We can accept body-data - "res.send(req.data)"
+
 // Add an end point (url and data)
 app.get('/', (req, res) =>
   res.json({ msg: 'Welcome to the Contact Keeper API...' })
 );
 
 // Define Routes
-app.use('/api/users', require('./routes/users')); //app.use(url, file) - when we are on 'url' look for imported 'file'
+app.use('/api/users', require('./routes/users')); //app.use(url, file) - when we are on 'url' look for 'file'
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/contacts', require('./routes/contacts'));
 
