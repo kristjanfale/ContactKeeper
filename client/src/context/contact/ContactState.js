@@ -47,6 +47,15 @@ const ContactState = props => {
   // ACTIONS
 
   // Add Contact
+  const addContact = contact => {
+    // Generate a random ID
+    contact.id = uuid.v4();
+    // Dispatch to reducer
+    dispatch({
+      type: ADD_CONTACT,
+      payload: contact
+    });
+  };
 
   // Delete Contact
 
@@ -65,7 +74,8 @@ const ContactState = props => {
   return (
     <ContactContext.Provider
       value={{
-        contacts: state.contacts
+        contacts: state.contacts,
+        addContact
       }}
     >
       {props.children}
