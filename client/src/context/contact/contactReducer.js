@@ -15,6 +15,14 @@ export default (state, action) => {
   switch (action.type) {
     case ADD_CONTACT:
       return { ...state, contacts: [...state.contacts, action.payload] };
+    case DELETE_CONTACT:
+      return {
+        ...state,
+        contacts: state.contacts.filter(contact => {
+          // Return all contact that don't have the right id (delete the one that has the right id)
+          return contact.id !== action.payload;
+        })
+      };
     default:
       return state;
   }
