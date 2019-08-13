@@ -19,9 +19,12 @@ export default (state, action) => {
       return {
         ...state,
         contacts: state.contacts.filter(contact => {
-          // Return all contact that don't have the right id (delete the one that has the right id)
-          return contact.id !== action.payload;
-        })
+          return contact.id !== action.payload; // Return all contact that don't have the right id (delete the one that has the right id)
+        }),
+        filtered:
+          state.filtered === null
+            ? null
+            : state.filtered.filter(contact => contact.id !== action.payload) // Return all contact that don't have the right id (delete the one that has the right id)
       };
     case UPDATE_CONTACT:
       return {
@@ -39,6 +42,21 @@ export default (state, action) => {
       return {
         ...state,
         currentContact: null
+      };
+    case FILTER_CONTACTS:
+      return {
+        ...state,
+        filtered: state.contacts.filter(contact => {
+          // With regular expresion we just want to match the text
+          const regex = new RegExp(`${action.payload}`, 'gi'); // 'gi' - global and case-sensitive
+          // Match name/email of the contact with the regular expresion
+          return contact.name.match(regex) || contact.email.match(regex); // This will return anything where the name/email matches the text, that is passed in
+        })
+      };
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filtered: null
       };
     default:
       return state;

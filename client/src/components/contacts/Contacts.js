@@ -6,13 +6,21 @@ const Contacts = () => {
   // Initialize Contacts Context
   const contactContext = useContext(ContactContext); // Now we have access to any state or methods/actions
 
-  const { contacts } = contactContext;
+  const { contacts, filtered } = contactContext;
+
+  if (contacts.length === 0) {
+    return <h4 className='text-center'>Please add contacts</h4>;
+  }
 
   return (
     <Fragment>
-      {contacts.map(contact => (
-        <ContactItem key={contact.id} contact={contact} />
-      ))}
+      {filtered !== null
+        ? filtered.map(contact => (
+            <ContactItem key={contact.id} contact={contact} />
+          ))
+        : contacts.map(contact => (
+            <ContactItem key={contact.id} contact={contact} />
+          ))}
     </Fragment>
   );
 };

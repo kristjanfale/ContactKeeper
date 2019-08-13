@@ -38,7 +38,8 @@ const ContactState = props => {
         type: 'professional'
       }
     ],
-    currentContact: null
+    currentContact: null,
+    filtered: null
   };
 
   // Pull out the state and dispatch from Reducer
@@ -90,8 +91,19 @@ const ContactState = props => {
   };
 
   // Filter Contacts
+  const filterContacts = text => {
+    dispatch({
+      type: FILTER_CONTACTS,
+      payload: text
+    });
+  };
 
   // Clear Fillter
+  const clearFilter = () => {
+    dispatch({
+      type: CLEAR_FILTER
+    });
+  };
 
   // Retrun provider, so we can wrap entire app with this context
   // value = {{ anything that we want to access from components - state and actions }}
@@ -100,11 +112,14 @@ const ContactState = props => {
       value={{
         contacts: state.contacts,
         currentContact: state.currentContact,
+        filtered: state.filtered,
         addContact,
         deleteContact,
         setCurrentContact,
         clearCurrentContact,
-        updateContact
+        updateContact,
+        filterContacts,
+        clearFilter
       }}
     >
       {props.children}

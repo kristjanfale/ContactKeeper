@@ -11,6 +11,7 @@ const ContactForm = () => {
     updateContact
   } = contactContext;
 
+  // useEffect runs each time that component mounts. If there's a change, the component will re-mount
   useEffect(() => {
     if (currentContact !== null) {
       // Set fields in form to contact we want to edit
