@@ -200,8 +200,6 @@ img {
 
 .btn {
   display: inline-block;
-  /* background: var(--primary-color);
-  color: #fff; */
   padding: 0.4rem 1.3rem;
   font-size: 1rem;
   border: none;
@@ -238,8 +236,6 @@ img {
   padding: 0.2rem 0.7rem;
   text-align: center;
   margin: 0.3rem;
-  /* background: var(--primary-color);
-  color: #fff; */
   border-radius: 5px;
 }
 
@@ -248,8 +244,6 @@ img {
   margin: 1rem 0;
   opacity: 0.9;
   border-radius: 5px;
-  /* background: var(--primary-color);
-  color: #fff; */
 }
 
 .btn-primary,
@@ -406,6 +400,33 @@ table th {
 
 .navbar .welcome span {
   margin-right: 0.6rem;
+}
+
+/* Animation (Add After) */
+.fade-enter {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: scaleX(1);
+  transition: transform 1000ms ease, opacity 1000ms ease;
+  /* transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7); */
+  /* transform-origin: 0% 0%; */
+}
+
+.fade-exit {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transform: scaleX(0);
+  transition: transform 1000ms ease, opacity 1000ms ease;
+  /* transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7); */
+  /* transform-origin: 0% 0%; */
 }
 
 /* Mobile Styles */
