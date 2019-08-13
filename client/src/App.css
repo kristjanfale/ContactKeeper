@@ -340,7 +340,7 @@ img {
 
 /* Forms */
 input {
-  margin: 1.2rem 0;
+  margin: 1.2rem auto;
   border-radius: 5px;
 }
 
@@ -357,10 +357,10 @@ input[type='date'],
 select,
 textarea {
   display: block;
-  width: 100%;
+  width: 85%;
   padding: 0.4rem;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
 }
 
 input[type='submit'],
