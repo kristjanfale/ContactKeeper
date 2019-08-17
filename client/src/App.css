@@ -412,8 +412,8 @@ table th {
   opacity: 1;
   transform: scaleX(1);
   transition: transform 1000ms ease, opacity 1000ms ease;
-  /* transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7); */
-  /* transform-origin: 0% 0%; */
+  transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7);
+  transform-origin: 0% 0%;
 }
 
 .fade-exit {
@@ -425,8 +425,8 @@ table th {
   opacity: 0;
   transform: scaleX(0);
   transition: transform 1000ms ease, opacity 1000ms ease;
-  /* transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7); */
-  /* transform-origin: 0% 0%; */
+  transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7);
+  transform-origin: 0% 0%;
 }
 
 /* Mobile Styles */

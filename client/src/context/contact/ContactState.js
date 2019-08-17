@@ -42,7 +42,7 @@ const ContactState = props => {
     filtered: null
   };
 
-  // Pull out the state and dispatch from Reducer
+  // Pull out the state and dispatch to Reducer
   // state - to access anything in our state, dispatch - to dispatch objects to reducer
   const [state, dispatch] = useReducer(ContactReducer, initialState);
 
