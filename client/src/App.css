@@ -198,6 +198,12 @@ img {
   grid-gap: 1rem;
 }
 
+.grid-2-3 {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-gap: 2rem;
+}
+
 .btn {
   display: inline-block;
   padding: 0.4rem 1.3rem;
@@ -334,7 +340,7 @@ img {
 
 /* Forms */
 input {
-  margin: 1.2rem auto;
+  margin: 1.2rem 0;
   border-radius: 5px;
 }
 
@@ -351,7 +357,7 @@ input[type='date'],
 select,
 textarea {
   display: block;
-  width: 85%;
+  width: 100%;
   padding: 0.4rem;
   font-size: 1rem;
   border: 1px solid #ccc;
@@ -360,6 +366,27 @@ textarea {
 input[type='submit'],
 button {
   font: inherit;
+}
+
+.form-group {
+  margin: 1.2rem 0;
+}
+
+.form-group input {
+  margin: 0.2rem 0;
+}
+
+.form-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  overflow: hidden;
+  padding: 0 2rem;
+}
+
+.form-container h1,
+h2,
+h3 {
+  text-align: center;
 }
 
 table th,
