@@ -13,7 +13,7 @@ const Contacts = () => {
     return (
       <TransitionGroup>
         <CSSTransition key='0' timeout={500} classNames='fade'>
-          <h4 className='text-center'>Please add contacts</h4>
+          <h4 className='text-center'>No Contacts</h4>
         </CSSTransition>
       </TransitionGroup>
     );
