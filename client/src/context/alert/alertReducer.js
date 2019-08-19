@@ -5,11 +5,15 @@ import { SET_ALERT, REMOVE_ALERT } from '../types';
 export default (state, action) => {
   switch (action.type) {
     case SET_ALERT:
-      return [...state, action.payload]; // payload: { msg, style, id }
+      return {
+        ...state,
+        alerts: [...state.alerts, action.payload] // payload: { msg, style, id }
+      };
     case REMOVE_ALERT:
-      return state.filter(alert => {
-        return alert.id !== action.payload; // payload: id
-      });
+      return {
+        ...state,
+        alerts: []
+      };
     default:
       return state;
   }

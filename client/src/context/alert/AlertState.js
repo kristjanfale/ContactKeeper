@@ -6,7 +6,9 @@ import { SET_ALERT, REMOVE_ALERT } from '../types';
 
 // Create initial state (array of objects)
 const AlertState = props => {
-  const initialState = [];
+  const initialState = {
+    alerts: []
+  };
 
   // Pull out the state and dispatch to Reducer
   // state - to access anything in our state, dispatch - to dispatch objects to reducer
@@ -15,20 +17,19 @@ const AlertState = props => {
   // ACTIONS
 
   // Set Alert
-  const setAlert = (msg, style, timeout = 4000) => {
+  const setAlert = (msg, style) => {
     const id = uuid.v4();
     dispatch({
       type: SET_ALERT,
       payload: { msg, style, id }
     });
+  };
 
-    // Delete alert after timeout(4sec)
-    setTimeout(() => {
-      dispatch({
-        type: REMOVE_ALERT,
-        payload: id
-      });
-    }, timeout);
+  // Remove Alert
+  const removeAlert = () => {
+    dispatch({
+      type: REMOVE_ALERT
+    });
   };
 
   // Retrun provider, so we can wrap entire app with this context
@@ -36,8 +37,9 @@ const AlertState = props => {
   return (
     <AlertContext.Provider
       value={{
-        alerts: state,
-        setAlert
+        alerts: state.alerts,
+        setAlert,
+        removeAlert
       }}
     >
       {props.children}
