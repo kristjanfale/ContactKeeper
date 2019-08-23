@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react'; // useReducer - To have access to state and to dispatch to Reducer
+import axios from 'axios';
 import AuthContext from './authContext';
 import AuthReducer from './authReducer';
 import {
@@ -31,12 +32,40 @@ const AuthState = props => {
   // Load User
 
   // Register User
+  const register = async formData => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    try {
+      // Fetch data (token)
+      const res = await axios.post('/api/users', formData, config);
+
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data // res.data is token
+      });
+    } catch (err) {
+      console.log(err.message);
+      dispatch({
+        type: REGISTER_FAIL,
+        payload: err.response.data.msg // If the user already exists, it will return this error
+      });
+    }
+  };
 
   // Login User
 
   // Logout
 
   // Clear Errors
+  const clearErrors = () => {
+    dispatch({
+      type: CLEAR_ERRORS
+    });
+  };
 
   // Retrun provider, so we can wrap entire app with this context
   // value = {{ anything that we want to access from components - state and actions }}
@@ -47,7 +76,9 @@ const AuthState = props => {
         isAuthenticated: state.isAuthenticated,
         loading: state.loading,
         user: state.user,
-        error: state.error
+        error: state.error,
+        register,
+        clearErrors
       }}
     >
       {props.children}

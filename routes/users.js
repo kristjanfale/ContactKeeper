@@ -42,7 +42,8 @@ router.post(
 
       // If the user exist
       if (user) {
-        res.status(400).json({ msg: 'User already exist' });
+        console.log('bebebebe');
+        return res.status(400).json({ msg: 'User already exists' });
       }
 
       // If the user doesn't exist, create a new one with User model (_id field is created automatically in DB)
