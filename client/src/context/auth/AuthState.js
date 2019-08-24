@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react'; // useReducer - To have access to state and to dispatch to Reducer
 import axios from 'axios';
+import setAuthToken from '../../utils/setAuthToken';
 import AuthContext from './authContext';
 import AuthReducer from './authReducer';
 import {
@@ -29,7 +30,25 @@ const AuthState = props => {
 
   // ACTIONS
 
-  // Load User
+  // Load User (async, because we are making a request to backend)
+  const loadUser = async () => {
+    // Load token into global headers
+    setAuthToken(localStorage.token);
+
+    try {
+      const res = await axios.get('/api/auth'); // Route that checks token and see if user is valid
+      dispatch({
+        type: USER_LOADED,
+        payload: res.data // user data
+      });
+    } catch (err) {
+      console.log(err.message);
+      dispatch({
+        type: AUTH_ERROR,
+        paylaod: err.response.data
+      });
+    }
+  };
 
   // Register User
   const register = async formData => {
@@ -47,10 +66,14 @@ const AuthState = props => {
         type: REGISTER_SUCCESS,
         payload: res.data // res.data is token
       });
+
+      // Get user from backend
+      loadUser();
     } catch (err) {
       console.log(err.message);
       dispatch({
         type: REGISTER_FAIL,
+        // .response is a property of the err object ( msg is defined in backend)
         payload: err.response.data.msg // If the user already exists, it will return this error
       });
     }
@@ -78,7 +101,8 @@ const AuthState = props => {
         user: state.user,
         error: state.error,
         register,
-        clearErrors
+        clearErrors,
+        loadUser
       }}
     >
       {props.children}

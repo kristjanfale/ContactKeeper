@@ -5,22 +5,30 @@ import { Link } from 'react-router-dom';
 // Props - Title and Icon
 const Navbar = ({ title, icon }) => {
   return (
-    <div className='navbar bg-primary'>
+    <div className='navbar'>
       <h1>
         <i className={icon} /> {title}
       </h1>
       <ul>
         <li>
-          <Link to='/'>Home</Link>
+          <Link to='/'>
+            <b>Home</b>
+          </Link>
         </li>
         <li>
-          <Link to='/about'>About</Link>
+          <Link to='/about'>
+            <b>About</b>
+          </Link>
         </li>{' '}
         <li>
-          <Link to='/register'>Register</Link>
+          <Link to='/register'>
+            <b>Register</b>
+          </Link>
         </li>{' '}
         <li>
-          <Link to='/login'>Login</Link>
+          <Link to='/login'>
+            <b>Login</b>
+          </Link>
         </li>
       </ul>
     </div>

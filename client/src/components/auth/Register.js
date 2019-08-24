@@ -2,21 +2,33 @@ import React, { useState, useContext, useEffect } from 'react';
 import AlertContext from '../../context/alert/alertContext';
 import AuthContext from '../../context/auth/authContext';
 
-const Register = () => {
+const Register = props => {
   // Initialize context
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
   const { setAlert, removeAlert } = alertContext;
-  const { register, error, clearErrors } = authContext;
+  const {
+    register,
+    error,
+    clearErrors,
+    isAuthenticated,
+    loadUser
+  } = authContext;
 
-  // For Errors
   useEffect(() => {
+    loadUser();
+    if (isAuthenticated) {
+      //If user is valid, redirect to '/'
+      props.history.push('/');
+    }
+
     if (error === 'User already exists') {
       setAlert(error, 'danger');
       clearErrors();
     }
-  }, [error]); // Run this when error is added/changed
+    // eslint-disable-next-line
+  }, [error, isAuthenticated, props.history]); // Run useEffect when [...] is added/changed
 
   const [user, setUser] = useState({
     name: '',
@@ -34,8 +46,6 @@ const Register = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    removeAlert();
-
     // Can do it this way or add 'required' on <input> element
     if (name === '' || email === '' || password === '') {
       setAlert('Please enter all fields', 'danger');
@@ -44,6 +54,7 @@ const Register = () => {
     } else if (password.length < 6) {
       setAlert('Password must contai at least 6 characters', 'danger');
     } else {
+      // Send input data to backend and fetch token
       register({
         name,
         email,

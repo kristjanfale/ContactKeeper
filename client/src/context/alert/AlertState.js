@@ -23,13 +23,14 @@ const AlertState = props => {
       type: SET_ALERT,
       payload: { msg, style, id }
     });
-  };
 
-  // Remove Alert
-  const removeAlert = () => {
-    dispatch({
-      type: REMOVE_ALERT
-    });
+    // Remove Alert
+    setTimeout(() => {
+      dispatch({
+        type: REMOVE_ALERT,
+        payload: id
+      });
+    }, 4000);
   };
 
   // Retrun provider, so we can wrap entire app with this context
@@ -38,8 +39,7 @@ const AlertState = props => {
     <AlertContext.Provider
       value={{
         alerts: state.alerts,
-        setAlert,
-        removeAlert
+        setAlert
       }}
     >
       {props.children}
