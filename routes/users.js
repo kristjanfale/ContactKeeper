@@ -42,7 +42,6 @@ router.post(
 
       // If the user exist
       if (user) {
-        console.log('bebebebe');
         return res.status(400).json({ msg: 'User already exists' });
       }
 

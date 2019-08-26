@@ -414,6 +414,7 @@ table th {
 
 .navbar ul {
   display: flex;
+  align-items: center;
 }
 
 .navbar a {
@@ -440,12 +441,12 @@ table th {
 }
 
 .navbar a::before {
-  top: 0;
+  top: 7px;
   transform-origin: left;
 }
 
 .navbar a::after {
-  bottom: 0;
+  bottom: 7px;
   transform-origin: right;
 }
 
