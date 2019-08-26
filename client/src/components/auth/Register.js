@@ -7,7 +7,7 @@ const Register = props => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
-  const { setAlert, removeAlert } = alertContext;
+  const { setAlert } = alertContext;
   const {
     register,
     error,

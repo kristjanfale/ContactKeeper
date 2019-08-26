@@ -51,6 +51,7 @@ const AuthState = props => {
   };
 
   // Register User
+  // Header
   const register = async formData => {
     const config = {
       headers: {
@@ -80,6 +81,34 @@ const AuthState = props => {
   };
 
   // Login User
+  const login = async formData => {
+    // Header
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    try {
+      // Fetch data (token)
+      const res = await axios.post('/api/auth', formData, config);
+
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data // res.data is token
+      });
+
+      // Get user from backend
+      loadUser();
+    } catch (err) {
+      console.log(err.message);
+      dispatch({
+        type: LOGIN_FAIL,
+        // .response is a property of the err object ( msg is defined in backend)
+        payload: err.response.data.msg // msg: 'Invalid Credentials'
+      });
+    }
+  };
 
   // Logout
 
@@ -102,7 +131,8 @@ const AuthState = props => {
         error: state.error,
         register,
         clearErrors,
-        loadUser
+        loadUser,
+        login
       }}
     >
       {props.children}
