@@ -3,12 +3,14 @@ import axios from 'axios';
 import ContactContext from './contactContext';
 import ContactReducer from './contactReducer';
 import {
+  GET_CONTACTS,
   ADD_CONTACT,
   DELETE_CONTACT,
   SET_CURRENT,
   CLEAR_CURRENT,
   UPDATE_CONTACT,
   FILTER_CONTACTS,
+  CLEAR_CONTACTS,
   CLEAR_FILTER,
   CONTACT_ERROR
 } from '../types';
@@ -16,10 +18,11 @@ import {
 // Create initial state
 const ContactState = props => {
   const initialState = {
-    contacts: [],
+    contacts: null,
     currentContact: null,
     filtered: null,
-    error: null
+    error: null,
+    loading: true
   };
 
   // Pull out the state and dispatch to Reducer
@@ -27,6 +30,23 @@ const ContactState = props => {
   const [state, dispatch] = useReducer(ContactReducer, initialState);
 
   // ACTIONS
+
+  // Get Contacts
+  const getContact = async () => {
+    try {
+      const res = await axios.get('/api/contacts');
+
+      dispatch({
+        type: GET_CONTACTS,
+        payload: res.data // res.data is all of the users contacts
+      });
+    } catch (err) {
+      dispatch({
+        type: CONTACT_ERROR,
+        payload: err.response // Error message
+      });
+    }
+  };
 
   // Add Contact
   const addContact = async contact => {
@@ -57,6 +77,13 @@ const ContactState = props => {
     dispatch({
       type: DELETE_CONTACT,
       payload: id
+    });
+  };
+
+  // Clear Contacts (on logout)
+  const clearContacts = () => {
+    dispatch({
+      type: CLEAR_CONTACTS
     });
   };
 
@@ -107,8 +134,11 @@ const ContactState = props => {
         currentContact: state.currentContact,
         filtered: state.filtered,
         error: state.error,
+        loading: state.loading,
+        getContact,
         addContact,
         deleteContact,
+        clearContacts,
         setCurrentContact,
         clearCurrentContact,
         updateContact,

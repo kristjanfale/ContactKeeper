@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
 const config = require('config'); // To get acces from the global variable, we created in config/default.json
+
 const db = config.get('mongoURI'); // Put mongoURI from config file in variable db
 
 const connectDB = async () => {

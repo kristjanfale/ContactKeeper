@@ -36,8 +36,6 @@ const Login = props => {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log('Login Submit');
-
     // Can do it this way or add 'required' on <input> element
     if (email === '' || password === '') {
       setAlert('Please enter all fields', 'danger');

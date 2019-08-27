@@ -1,11 +1,13 @@
 // Reducer - function that decides what is going to happen to the state, based on the action
 import {
+  GET_CONTACTS,
   ADD_CONTACT,
   DELETE_CONTACT,
   SET_CURRENT,
   CLEAR_CURRENT,
   UPDATE_CONTACT,
   FILTER_CONTACTS,
+  CLEAR_CONTACTS,
   CLEAR_FILTER,
   CONTACT_ERROR
 } from '../types';
@@ -14,8 +16,18 @@ import {
 export default (state, action) => {
   // We want to evaluate the type
   switch (action.type) {
+    case GET_CONTACTS:
+      return {
+        ...state,
+        contacts: action.payload,
+        loading: false
+      };
     case ADD_CONTACT:
-      return { ...state, contacts: [...state.contacts, action.payload] };
+      return {
+        ...state,
+        contacts: [...state.contacts, action.payload],
+        loading: false
+      };
     case DELETE_CONTACT:
       return {
         ...state,
@@ -25,14 +37,25 @@ export default (state, action) => {
         filtered:
           state.filtered === null
             ? null
-            : state.filtered.filter(contact => contact.id !== action.payload) // Return all contact that don't have the right id (delete the one that has the right id)
+            : state.filtered.filter(contact => contact.id !== action.payload), // Return all contact that don't have the right id (delete the one that has the right id)
+        loading: false
+      };
+    case CLEAR_CONTACTS:
+      return {
+        ...state,
+        contacts: null,
+        filtered: null,
+        error: null,
+        currentContact: null,
+        loading: true
       };
     case UPDATE_CONTACT:
       return {
         ...state,
         contacts: state.contacts.map(contact =>
           contact.id === action.payload.id ? action.payload : contact
-        )
+        ),
+        loading: false
       };
     case SET_CURRENT:
       return {
