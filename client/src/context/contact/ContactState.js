@@ -90,6 +90,34 @@ const ContactState = props => {
     }
   };
 
+  // Update Contact
+  const updateContact = async contact => {
+    // Need headers, because we are sending data
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    try {
+      const res = await axios.put(
+        `/api/contacts/${contact._id}`,
+        contact,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_CONTACT,
+        payload: res.data // res.data is contact object
+      });
+    } catch (err) {
+      dispatch({
+        type: CONTACT_ERROR,
+        payload: err.response.msg // Error message
+      });
+    }
+  };
+
   // Clear Contacts (on logout)
   const clearContacts = () => {
     dispatch({
@@ -109,14 +137,6 @@ const ContactState = props => {
   const clearCurrentContact = () => {
     dispatch({
       type: CLEAR_CURRENT
-    });
-  };
-
-  // Update Contact
-  const updateContact = contact => {
-    dispatch({
-      type: UPDATE_CONTACT,
-      payload: contact
     });
   };
 
