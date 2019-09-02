@@ -1,9 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Github Finder
+## Contact Keeper
 
-With this app you can search Github users and view their profiles and repos.
-At first the app was build without Hooks and Context API. They were added later.
+With this app you can manage your contacts (name, phone, email).
 
 ### `npm install`
 
